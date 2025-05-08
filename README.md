@@ -67,3 +67,7 @@ Chronotask es una aplicación web estilo **Pomodoro** enfocada en la productivid
    # Frontend
    cd ../client
    npm run dev
+
+📷 Capturas de pantalla
+![Captura de pantalla 2025-05-08 101341](https://github.com/user-attachments/assets/be0073b2-0703-4298-9c76-80680a38d382)
+

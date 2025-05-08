@@ -44,3 +44,26 @@ Chronotask es una aplicación web estilo **Pomodoro** enfocada en la productivid
    ```bash
    git clone https://github.com/tu-usuario/chronotask.git
    cd chronotask
+2. Instala las dependencias:
+   ```bash
+   # Frontend
+   cd client
+   npm install
+
+   # Backend
+   cd ../server
+   npm install
+   npx prisma migrate dev --name init
+3. Configura las variables:
+   Crear un archivo .env en server/ con:
+   ```ini
+   JWT_SECRET=supersecreto
+4. Ejecuta:
+   ```bash
+   # Backend
+   cd server
+   npm run dev
+
+   # Frontend
+   cd ../client
+   npm run dev

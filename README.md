@@ -1,12 +1,46 @@
-# React + Vite
+# 🧠 Chronotask
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Chronotask es una aplicación web estilo **Pomodoro** enfocada en la productividad, con gestión de tareas, proyectos y estadísticas.
 
-Currently, two official plugins are available:
+> "Tu tiempo bajo control, una tarea a la vez 🍅"
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Funcionalidades principales
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- ⏱️ Temporizador Pomodoro configurable (trabajo y descansos)
+- 📝 Gestión de tareas diarias con estimación de pomodoros
+- 📂 Organización por proyectos (crear, asignar y filtrar)
+- 📊 Reportes semanales visuales (gráfico de pomodoros)
+- 🧘‍♂️ Modo sin distracciones (pantalla oscura animada)
+- 🌙 Modo oscuro / claro con persistencia
+- 🔐 Registro e inicio de sesión con JWT
+- 📤 Exportación de tareas a CSV
+- 💾 Modo invitado (sin cuenta) con almacenamiento local
+- ✅ Todo sin suscripciones ni versiones “Pro”
+
+---
+
+## 🛠️ Tecnologías usadas
+
+### Frontend:
+- React + Tailwind CSS
+- Framer Motion (animaciones)
+- Chart.js (gráficos)
+- Heroicons (iconos SVG)
+- Vite (entorno de desarrollo)
+
+### Backend:
+- Node.js + Express
+- Prisma ORM
+- SQLite (desarrollo) o PostgreSQL (producción-ready)
+- JWT para autenticación
+
+---
+
+## 📦 Instalación local
+
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/tu-usuario/chronotask.git
+   cd chronotask

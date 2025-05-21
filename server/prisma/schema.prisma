@@ -28,10 +28,10 @@ model User {
 
 model Task {
   id          Int       @id @default(autoincrement())
-  title       String
-  pomodoros   Int       @default(0)
-  completed   Boolean   @default(false)
-  used        Int       @default(0)
+  title              String
+  estimatedPomodoros Int       @default(0)
+  completed          Boolean   @default(false)
+  used               Int       @default(0)
   createdAt   DateTime  @default(now())
   user        User      @relation(fields: [userId], references: [id])
   userId      Int

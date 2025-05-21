@@ -10,18 +10,31 @@ import projectsRoutes from './routes/projects.js';
 
 dotenv.config();
 const app = express();
-const prisma = new PrismaClient();
+export const prisma = new PrismaClient();
 
-app.use('/api/tasks', tasksRoutes);
-app.use('/api/settings', settingsRoutes);
 app.use(cors());
 app.use(express.json());
+
 app.use('/api/auth', authRoutes);
+app.use('/api/tasks', tasksRoutes);
+app.use('/api/settings', settingsRoutes);
+app.use('/api/stats', statsRoutes);
+app.use('/api/projects', projectsRoutes);
 app.get('/', (req, res) => {
   res.send('Chronotask API funcionando 🎯');
 });
-app.use('/api/stats', statsRoutes);
-app.use('/api/projects', projectsRoutes);
+
+// Middleware de manejo de errores global
+app.use((err, req, res, next) => {
+  console.error(err.stack); // Registrar el stack trace del error
+
+  // Si el error tiene un statusCode, úsalo, de lo contrario, usa 500
+  const statusCode = err.statusCode || 500;
+  // Si el error tiene un mensaje, úsalo, de lo contrario, un mensaje genérico
+  const message = err.message || 'Ocurrió un error interno en el servidor.';
+
+  res.status(statusCode).json({ error: message });
+});
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {

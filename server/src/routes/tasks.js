@@ -1,8 +1,7 @@
 import express from 'express';
-import { PrismaClient } from '@prisma/client';
 import { authenticateToken } from '../middleware/auth.js';
+import { prisma } from '../index.js';
 
-const prisma = new PrismaClient();
 const router = express.Router();
 
 router.use(authenticateToken);
@@ -20,7 +19,7 @@ router.post('/', async (req, res) => {
   const task = await prisma.task.create({
     data: {
       title,
-      estimated,
+      estimatedPomodoros: estimated,
       completed: false,
       used: 0,
       userId: req.user.userId

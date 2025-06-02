@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { getActiveTask, getTasks } from '../utils/taskStorage';
 import { getSettings } from '../utils/settingsStorage';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useFocus } from '../context/FocusContext';
 import { statsService } from '../utils/statsService';
 
@@ -15,7 +15,7 @@ const BREAK_DURATION = settings.break * 60;   // Convertir minutos a segundos
 export default function PomodoroTimer() {
   const [secondsLeft, setSecondsLeft] = useState(WORK_DURATION);
   const [isRunning, setIsRunning] = useState(false);
-  const [isWorkTime, setIsWorkTime] = useState(true);
+  const [isWorkTime] = useState(true);
   const [activeTask, setActiveTask] = useState(null);
   const { isFocused, setIsFocused } = useFocus();
 
@@ -28,6 +28,16 @@ export default function PomodoroTimer() {
       setSecondsLeft(isWorkTime ? settings.work * 60 : settings.break * 60);
     }
   }, [isWorkTime, isRunning]);
+
+  const handleTimerEnd = useCallback(async () => {
+    const activeId = getActiveTask();
+    const allTasks = getTasks(); // localStorage
+    const activeTask = allTasks.find(t => t.id === activeId);
+
+    if (isWorkTime && activeTask) {
+      await statsService.register();
+    }
+  }, [isWorkTime]);
 
   useEffect(() => {
     if (isRunning) {
@@ -44,7 +54,7 @@ export default function PomodoroTimer() {
     }
 
     return () => clearInterval(intervalRef.current);
-  }, [isRunning]);
+  }, [isRunning, handleTimerEnd]);
 
   useEffect(() => {
     const activeId = getActiveTask();
@@ -52,16 +62,6 @@ export default function PomodoroTimer() {
     const task = tasks.find(t => t.id === activeId);
     setActiveTask(task || null);
   }, [secondsLeft]); // se actualizará también cuando pase el tiempo
-
-  const handleTimerEnd = async () => {
-    const activeId = getActiveTask();
-    const allTasks = getTasks(); // localStorage
-    const activeTask = allTasks.find(t => t.id === activeId);
-
-    if (isWorkTime && activeTask) {
-      await statsService.register();
-    }
-  };
   const toggleTimer = () => {
     setIsRunning(prev => !prev);
   };

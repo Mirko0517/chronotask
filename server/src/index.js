@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 });
 
 // Middleware de manejo de errores global
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   console.error(err.stack); // Registrar el stack trace del error
 
   // Si el error tiene un statusCode, úsalo, de lo contrario, usa 500

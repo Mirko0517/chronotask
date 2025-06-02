@@ -15,7 +15,7 @@ router.post('/register', async (req, res) => {
     if (exists) return res.status(400).json({ error: 'Usuario ya existe' });
 
     const hashed = await bcrypt.hash(password, 10);
-    const user = await prisma.user.create({
+    await prisma.user.create({
       data: { email, password: hashed },
     });
 
